@@ -52,7 +52,7 @@ namespace api_multas.Models.TrafficOfficer
                 conection = ConfigurationManager.ConnectionStrings["cnConection"].ConnectionString;
                 con = new SqlConnection(conection);
                 con.Open();
-                string cadena = "update Traffic_Officer set full_name = '" + full_name + "', id_number = '" + id_number + "', rank_level = '" + rank_level + "' where officer_id = " + officer_id;
+                string cadena = "update Traffic_Officer set full_name = '" + full_name + "', id_number = '" + id_number + "', rank_level = '" + rank_level + "' where officer_id = " + "'" + officer_id + "'" ;
                 SqlCommand cmd = new SqlCommand(cadena, con);
                 result.response = cmd.ExecuteNonQuery();
                 result.message = "User updated successfully";
@@ -77,7 +77,7 @@ namespace api_multas.Models.TrafficOfficer
                 conection = ConfigurationManager.ConnectionStrings["cnConection"].ConnectionString;
                 con = new SqlConnection(conection);
                 con.Open();
-                string cadena = "delete from Traffic_Officer where officer_id = " + officer_id;
+                string cadena = "delete from Traffic_Officer where officer_id = " + "'" + officer_id + "'";
                 SqlCommand cmd = new SqlCommand(cadena, con);
                 result.response = cmd.ExecuteNonQuery();
                 result.message = "User deleted successfully";
@@ -126,7 +126,7 @@ namespace api_multas.Models.TrafficOfficer
                 conection = ConfigurationManager.ConnectionStrings["cnConection"].ConnectionString;
                 con = new SqlConnection(conection);
                 con.Open();
-                string cadena = "select * from Traffic_Officer where officer_id = " + officer_id;
+                string cadena = "select * from Traffic_Officer where officer_id = " + "'" + officer_id + "'";
                 SqlCommand cmd = new SqlCommand(cadena, con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(ds);

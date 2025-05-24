@@ -22,6 +22,17 @@ namespace api_multas.Models.Violation
             public requestSanction sanction { get; set; }
         }
 
+        public class insertViolation
+        {
+            public string violation_id { get; set; }
+            public DateTime violation_date { get; set; }
+            public string status_infraction { get; set; }
+            public string vehicle_id { get; set; }
+            public string driver_id { get; set; }
+            public string officer_id { get; set; }
+            public requestSanction sanction { get; set; }
+        }
+
         public class requestDeleteViolation
         {
             public string violation_id { get; set; }

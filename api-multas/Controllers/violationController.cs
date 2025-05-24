@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -20,19 +21,13 @@ namespace api_multas.Controllers
     {
         [HttpPost]
         [Route("rest/api/insertViolation")]
-        public IHttpActionResult insertViolation(requestViolation model)
+        public IHttpActionResult insertViolation(insertViolation model)
         {
-
-            responseVehicle  vehicle = new csVehicle().insertVehicle(model.vehicle.license_plate, model.vehicle.brand, model.vehicle.model, model.vehicle.color, model.vehicle.vehicle_type);
-            if (vehicle.response == 0) return BadRequest("vehicle error: " + vehicle.message);
-            responseDriver driver = new csDriver().insertDriver(model.driver.full_name, model.driver.id_number, model.driver.address, model.driver.phone, model.driver.license_number);
-            if (driver.response == 0) return BadRequest("driver error: " + driver.message);
-            responseTrafficOfficer officer = new csTrafficOfficer().insertTrafficOfficer(model.officer.full_name, model.officer.id_number, model.officer.rank_level);
-            if (officer.response == 0) return BadRequest("officer error: " + officer.message);
+            Debug.WriteLine(model);
             responseSanction sanction = new csSanction().insertSanction(model.sanction.description, model.sanction.sanction_type, model.sanction.cost);
             if (sanction.response == 0) return BadRequest("sanction error: " + sanction.message);
 
-            return Ok(new csViolation().insertViolation(vehicle.vehicle_id, driver.driver_id, sanction.sanction_id, officer.officer_id));
+            return Ok(new csViolation().insertViolation(model.vehicle_id, model.driver_id, sanction.sanction_id, model.officer_id));
         }
         [HttpPut]
         [Route("rest/api/updateViolation")]
@@ -53,6 +48,13 @@ namespace api_multas.Controllers
         public IHttpActionResult getAllViolations()
         {
             return Ok(new csViolation().getAllViolations());
+        }
+
+        [HttpGet]
+        [Route("rest/api/getViolationById")]
+        public IHttpActionResult getViolationById(string violation_id)
+        {
+            return Ok(new csViolation().getViolationById(violation_id));
         }
     }
 }

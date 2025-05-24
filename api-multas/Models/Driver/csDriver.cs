@@ -76,7 +76,7 @@ namespace api_multas.Models.Driver
                 conection = ConfigurationManager.ConnectionStrings["cnConection"].ConnectionString;
                 con = new SqlConnection(conection);
                 con.Open();
-                string cadena = "delete from Driver where driver_id = " + driver_id;
+                string cadena = "delete from Driver where driver_id = " + "'" + driver_id + "'";
                 SqlCommand cmd = new SqlCommand(cadena, con);
                 result.response = cmd.ExecuteNonQuery();
                 result.message = "User deleted successfully";
@@ -122,7 +122,7 @@ namespace api_multas.Models.Driver
                 conection = ConfigurationManager.ConnectionStrings["cnConection"].ConnectionString;
                 con = new SqlConnection(conection);
                 con.Open();
-                string cadena = "select * from Driver where driver_id = " + driver_id;
+                string cadena = "select * from Driver where driver_id = " + "'" + driver_id + "'";
                 SqlCommand cmd = new SqlCommand(cadena, con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(ds);

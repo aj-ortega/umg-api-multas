@@ -40,5 +40,13 @@ namespace api_multas.Controllers
         {
             return Ok(new csVehicle().getVehicleById(vehicle_id));
         }
+
+        [HttpGet]
+        [Route("rest/api/getViolationsByVehicleId")]
+        public IHttpActionResult getViolationsByVehicleId(string vehicle_id)
+        {
+            return Ok(new csVehicle().getViolationsByVehicleId(vehicle_id));
+        }
+        
     }
 }

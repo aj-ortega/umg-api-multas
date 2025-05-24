@@ -56,7 +56,7 @@ namespace api_multas.Models.User
 
                 con.Open();
 
-                string cadena = "update users set full_name = '" + full_name + "', username = '" + username + "', password_hash = '" + password_hash + "', role_user = '" + role_user + "' where user_id = " + user_id;
+                string cadena = "update users set full_name = '" + full_name + "', username = '" + username + "', password_hash = '" + password_hash + "', role_user = '" + role_user + "' where user_id = " + "'" + user_id + "'";
                 SqlCommand cmd = new SqlCommand(cadena, con);
                 result.response = cmd.ExecuteNonQuery();
                 result.message = "User updated successfully";
@@ -80,7 +80,7 @@ namespace api_multas.Models.User
                 conection = ConfigurationManager.ConnectionStrings["cnConection"].ConnectionString;
                 con = new SqlConnection(conection);
                 con.Open();
-                string cadena = "delete from users where user_id = " + user_id;
+                string cadena = "delete from users where user_id = " + "'" + user_id + "'";
                 SqlCommand cmd = new SqlCommand(cadena, con);
                 result.response = cmd.ExecuteNonQuery();
                 result.message = "User deleted successfully";
@@ -128,7 +128,7 @@ namespace api_multas.Models.User
                 conection = ConfigurationManager.ConnectionStrings["cnConection"].ConnectionString;
                 con = new SqlConnection(conection);
                 con.Open();
-                string cadena = "select * from users where user_id = " + user_id;
+                string cadena = "select * from users where user_id = " + "'" + user_id + "'";
                 SqlCommand cmd = new SqlCommand(cadena, con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(ds);
